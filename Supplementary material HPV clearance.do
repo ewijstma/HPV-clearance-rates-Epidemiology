@@ -1547,6 +1547,8 @@ gen period =1
 
 	end
 
+analysisAC 
+
 **Approach A2
 use "H2M_ApproachA2.dta", clear 
 analysisAC
@@ -1594,6 +1596,8 @@ gen period=1
 	glm _d period, exposure(PMO_9v) link(log) f(poisson) eform
 
 end
+
+analysisB
 
 **Approach B2
 use "H2M_ApproachB2.dta", clear 
