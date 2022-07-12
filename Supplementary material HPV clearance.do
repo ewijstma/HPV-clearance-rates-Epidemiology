@@ -1,20 +1,28 @@
-/* This do file is written in STATA 15, and contains all data management and 
-analyses for the study by Wijstma et al., (2022) titled "Approaches to estimating
-clearance rates for HHPV groupings: a systematic review and data examples"
+/* This do file is written in STATA 15, and contains data management and 
+analyses of data from the H2M study, as used in the article by Wijstma et al.(2022) 
+entitled "Approaches to estimating clearance rates for HHPV groupings: 
+a systematic review and data examples".
 
-** Chapter 1: Data management for the H2M study cohort
+** Chapter 1: Data management: preparing datasets including only incident or prevalent infections
 		* 1.1 labelling raw data
 		* 1.2 general data management
 		* 1.3 preparing dataset including only incident infections
 		* 1.4 preparing dataset including only prevalent infections
-		* 1.5 preparation of datasets for approach A1-3
-		* 1.6 preparation of datasets for approach B1-3
-		* 1.7 preparation of datasets for approach C1-3
-** Chapter 2: Clearance rate analyses for the H2M study cohort
 
-** Chapter 3: Data management for the HAVANA study cohort
-** Chapter 4: Clearance rate analyses for the HAVANA study cohort
+** Chapter 2: Data management: preparing datasets for the analysis of each specific approach
+		* 2.1 dataset for approach A1
+		* 2.2 dataset for approach A2
+		* 2.3 dataset for approach A3
+		* 2.4 dataset for approach B1
+		* 2.5 dataset for approach B2 and B3
+		* 2.6 dataset for approach C1
+		* 2.7 dataset for approach C2 and C3
 
+** Chapter 3: Estimating grouped clearance rates
+		* 3.1 clearance rates according to approach A1, A2 and A3
+		* 3.2 clearance rates according to approach B1, B2 and B3
+		* 3.3 clearance rates according to approach C1, C2 and C3
+		
 */
 
 ********************************************************************************
@@ -1084,7 +1092,7 @@ end
 
 save "H2M_ApproachB1.dta", replace
 
-******************* Chapter 2.5 : preparing datasets for B2 ********************
+******************* Chapter 2.5 : preparing datasets for B2 and B3 ********************
 
 *****************************************
 /*The B2 approach counts a maximum of one clearance event. When the
@@ -1113,8 +1121,6 @@ use "H2M_prevalent.dta", clear
 makeappB
 save "H2M_ApproachB2", replace
 
-******************* Chapter 2.6 : preparing datasets for B3 ********************
-
 *****************************************
 /*The B3 approach counts a maximum of one clearance event. When the
 first specific HPV type has cleared, no more person-time is counted.
@@ -1128,7 +1134,7 @@ use "H2M_all.dta", clear
 makeappB
 save "H2M_ApproachB3", replace
 
-******************* Chapter 2.7 : preparing datasets for C1 ********************
+******************* Chapter 2.6 : preparing datasets for C1 ********************
 
 *****************************************
 /*The C1 approach counts a clearance event when a person was positive for
@@ -1363,7 +1369,7 @@ drop firstPos2v firstNeg2v
 drop PDO_2v
 	
 
-***************** CHAPTER 5: 4v HPV *****************
+****Grouping: 4v HPV 
 *the 4v vaccine types include 6, 11, 16 & 18
 
 sort persid sampledat
@@ -1473,7 +1479,7 @@ end
 		
 save "H2M_ApproachC1", replace	
 
-******************* Chapter 2.8 : preparing datasets for C2 ********************
+******************* Chapter 2.7 : preparing datasets for C2 and C3  ********************
 
 /*The C2 approach counts a clearance event when a person was positive for
 at least one HPV type within a grouping, and thereafter is positive for zero 
@@ -1485,8 +1491,6 @@ The source dataset is "Dta\H2M_prevalent.dta" */
 use "H2M_prevalent.dta", clear
 makeappC
 save "Dta\H2M_ApproachC2", replace
-
-******************* Chapter 2.9 : preparing datasets for C2 ********************
 
 /*The C3 approach counts a clearance event when a person was positive for
 at least one HPV type within a grouping, and thereafter is positive for zero 
@@ -1501,7 +1505,7 @@ save "Dta\H2M_ApproachC3", replace
 
 	
 ********************************************************************************
-*** Chapter 3: CR analyses!
+*** Chapter 3: CR analyses
 ********************************************************************************
 
 **************** Chapter 3.1: CRs for approaches A1, A2 and A3 *****************
